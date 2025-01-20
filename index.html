@@ -4,30 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="game.js" defer></script>
 </head>
 <body>
     <div class="container">
         <h1>Tic Tac Toe</h1>
-        <h2 id="statusText">X's turn</h2>
+        <button class="restartBtn" id="restartBtn">Restart</button>
         <div class="gameWrap">
             <div class="pointsWrap">
-                <p class="playerDisplay">X:<span class="scoreAmount" id="x-score">5</span></p>
-                <p class="playerDisplay">O:<span class="scoreAmount" id="o-score">5</span></p>
+                <p class="playerDisplay">X:<span class="scoreAmount" id="x-score">0</span></p>
+                <p class="playerDisplay">O:<span class="scoreAmount" id="o-score">0</span></p>
             </div>
             <div class="canvas">
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
+                <div data-row="0" data-col="0" id="cell" class="cell"></div>
+                <div data-row="0" data-col="1" id="cell" class="cell"></div>
+                <div data-row="0" data-col="2" id="cell" class="cell"></div>
+                <div data-row="1" data-col="0" id="cell" class="cell"></div>
+                <div data-row="1" data-col="1" id="cell" class="cell"></div>
+                <div data-row="1" data-col="2" id="cell" class="cell"></div>
+                <div data-row="2" data-col="0" id="cell" class="cell"></div>
+                <div data-row="2" data-col="1" id="cell" class="cell"></div>
+                <div data-row="2" data-col="2" id="cell" class="cell"></div>
             </div>
+            <h2 class="statusText" id="statusText">X's turn</h2>
         </div>
+        <footer>
+            <p class="footer">Created by LauritzCode</p>
+        </footer>
     </div>
 </body>
 </html>

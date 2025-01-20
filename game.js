@@ -9,34 +9,63 @@ let board = [
 
 let currentPlayer = "X" 
 let gameOver = false;
+let xScore = 0
+let oScore = 0
+
+const restartBtn = document.getElementById("restartBtn");
+const statusText = document.getElementById("statusText");
+const cells = document.querySelectorAll("#cell");
+const scoreX = document.querySelector("#x-score")
+const scoreO = document.querySelector("#o-score")
+
+const getGameOver = () => gameOver
 
 const changePlayer = () => {
    currentPlayer = currentPlayer === "X" ? "O" : "X"
+   
 };
 
-const updateBoard = (row, col) => {
+const updateScore = () => {
 
+    if (checkWinner() && currentPlayer === "X") {
+        xScore++
+        scoreX.textContent = xScore 
+    } else if (checkWinner() && currentPlayer === "O") {
+        oScore++ 
+        scoreO.textContent = oScore
+
+    } else return 
+
+
+}
+
+
+const updateBoard = (row, col) => {
+    
     if (gameOver === true) {
         return 
     } else {
+
         if (board[row][col] === "") {
             board[row][col] = currentPlayer
             const winner = checkWinner();
             const tie = checkTie(); 
             if (winner) {
-                console.log(`${winner} wins!`)
+                updateScore();
+                statusText.textContent = `${winner} wins!`
                 gameOver = true
 
             } else if (tie) { 
-                console.log("It's a tie!");
+                statusText.textContent ="It's a tie!"
                 gameOver = true;
             }
             else { 
                 changePlayer();
+                statusText.textContent = `${currentPlayer}'s turn`
             }
         
             } else {
-                console.log("Spot's already taken");
+                statusText.textContent ="Spot's already taken";
             }
     }
    
@@ -65,8 +94,6 @@ const checkWinner = () => {
         return board[0][2]
     }
 
-    
-
     return null
 }
 
@@ -90,27 +117,39 @@ const gameReset = () => {
             board[i][j] = "";
         }
     }
+        currentPlayer = "X"
 }
 
-return { updateBoard, changePlayer, getBoard, checkWinner, checkTie, gameReset };
+cells.forEach(cell => {
+    cell.addEventListener("click", () => {
+        const row = cell.dataset.row
+        const col = cell.dataset.col
+
+    if (getGameOver() || cell.textContent !== "") return
+ 
+    cell.textContent = `${currentPlayer}`
+    cell.classList.add("clicked")
+    cell.classList.add(currentPlayer === "X" ? "playerx" : "playero");
+    console.log(cell.classList);
+    updateBoard(row, col);
+})
+})
+
+restartBtn.addEventListener("click", () => {
+    gameReset() 
+    cells.forEach(cell => {
+        cell.textContent = "";
+        cell.classList.remove("clicked");
+        cell.classList.remove("playero");
+        cell.classList.remove("playerx");
+        statusText.textContent = `${currentPlayer}'s turn!`
+    })
+
+})
+
+
+return { updateBoard, changePlayer, getBoard, checkWinner, checkTie, gameReset, getGameOver, updateScore };
 
 };
 
 const game = gameBoard();
-
-
-
-game.updateBoard(0, 0)
-game.updateBoard(0, 1)
-game.updateBoard(0, 2)
-game.updateBoard(1, 0)
-game.updateBoard(1, 2)
-game.updateBoard(2, 0)
-game.updateBoard(2, 1)
-game.updateBoard(2, 2)
-game.updateBoard(1, 1)
-
-
-console.log(game.getBoard())
-console.log(game.gameOver)
-
