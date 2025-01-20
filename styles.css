@@ -1,0 +1,65 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body { 
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.canvas {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    height: 300px;
+    width: 300px;
+    border: 2px solid black;
+}
+
+.cell {
+    border: 2px solid black;
+
+}
+
+.gameWrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto
+}
+
+.pointsWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.pointsWrap > p {
+    font-size: 1.15rem;
+    font-weight: bold;
+}
+
+.pointsWrap span {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-left: 5px;
+}
